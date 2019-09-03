@@ -1,10 +1,11 @@
 export class Utils {
   constructor() {}
 
-  static convertToEst(utcDateTime: string): Date {
+  static convertToEst(utcDateTime: string): string {
     const utcToEstHourOffset = -4;
     const fullDate: Date = new Date(utcDateTime);
-    return this.addOffsets(fullDate, utcToEstHourOffset, 0);
+    const estDateTime = this.addOffsets(fullDate, utcToEstHourOffset, 0);
+    return this.formatDate(estDateTime);
   }
 
   private static addOffsets(
@@ -20,7 +21,7 @@ export class Utils {
     return newDate;
   }
 
-   static formatDate(fullDate: Date): string {
+  private static formatDate(fullDate: Date): string {
     const year = fullDate.getUTCFullYear();
     const month = fullDate.getUTCMonth() + 1;
     const date = fullDate.getUTCDate();
@@ -47,5 +48,4 @@ export class Utils {
 }
 
 const date = Utils.convertToEst("2019-10-03T20:01:13.534Z");
-const formattedDate = Utils.formatDate(date);
-console.log(formattedDate)
+console.log(date);
